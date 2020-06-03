@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>CryptoJS Example - HMAC</title>
+    <meta name="description" content="CryptoJs Example - HMAC" />
+    <meta name="author" content="Mario Mustapić" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-base64.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/enc-utf8.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/hmac.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <!--[if lt IE 9]>
+      <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+        .button {
+            background-color: #4CAF50;
+            border-radius: 4px;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.8;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            opacity: 1
+        }
+
+        .pre {
+            line-height: 2em;
+            background: linear-gradient(180deg, #ccc 0, #ccc 2em, #eee 0);
+            background-size: contain;
+            background-origin: content-box;
+        }
+
+        input {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://pay.line.me/tw/developers/apis/onlineApis?locale=en_US"><img src="LINE-Pay(h)_W238_n.png"
+            alt="LINE Pay logo"></a>
+    <br />
+    <br />
+    <a href="https://pay.line.me/tw/developers/apis/onlineApis?locale=en_US">LINE Pay API Documentation</a>
+    <br />
+    <br />
+    <strong><label>Hmac Signature:</label></strong>
+    <br />
+    <div>Algorithm : HMAC-SHA256 <br />
+        Key : Channel Secret (Provides Channel Id and Channel SecretKey from the LINE Pay merchants)<br />
+        Http Method<br />
+        GET : Channel Secret + URI + Query String + nonce<br />
+        POST : Channel Secret + URI + Request Body + nonce<br /></div>
+    <br />
+    <strong><label>SecretKey:</label></strong>
+    <input id="secretKey" value="ChannelSecretKey"></span>
+    <br />
+    <br />
+    <strong><label>Url:</label></strong>
+    <input id="url" value="/serivce/v1/add"></span>
+    <br />
+    <br />
+    <strong><label>Nonce:</label></strong>
+    <input id="nonce" value="uuid"></span>
+    <br />
+    <br />
+    <strong><label>QueryString:</label></strong>
+    <input id="queryString" value="Name1=Value1&Name2=Value2"></span>
+    <br />
+    <br />
+    <strong><label>RequestBody:</label></strong>
+    <input id="body" value="{&quot;name&quot;:&quot;Tom&quot;}"></span>
+    <br />
+    <br />
+    <strong><label>Payload:</label></strong>
+    <span id="payload"></span>
+    <br />
+    <br />
+    <strong><label>Signature:</label></strong>
+    <span id="signature"></span>
+    <br />
+    <br />
+    <strong><label>Auth Headers:</label></strong>
+    <pre class="pre" id="headers"></pre>
+    <button class="button" id="generate" onclick="generate()">Generate HMAC Signature</button>
+</body>
+
+</html>
+<script src="index.js" language="javascript" type="text/javascript"></script>
