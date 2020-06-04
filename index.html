@@ -29,7 +29,6 @@
             background-color: #1AB649;
             border-radius: 4px;
             color: white;
-            padding: 16px 32px;
             text-align: center;
             font-size: 16px;
             margin: 4px 2px;
@@ -42,6 +41,10 @@
 
         .button:hover {
             opacity: 1
+        }
+
+        .bigbutton {
+            padding: 16px 32px;
         }
 
         .pre {
@@ -83,6 +86,7 @@
     <br />
     <strong><label>Nonce:</label></strong>
     <input id="nonce" value="uuid"></span>
+    <button class="button" onclick="generate_nonce()">Generate Nonce</button>
     <br />
     <br />
     <strong><label>QueryString:</label></strong>
@@ -103,7 +107,7 @@
     <br />
     <strong><label>Auth Headers:</label></strong>
     <pre class="pre" id="headers"></pre>
-    <button class="button" id="generate" onclick="generate()">Generate HMAC Signature</button>
+    <button class="button bigbutton" id="generate" onclick="generate()">Generate HMAC Signature</button>
 </body>
 
 </html>
