@@ -31,14 +31,52 @@ function generate() {
     authorizationNonce + " " + authorization;
 }
 
+function generate_and_copy() {
+  generate();
+  copyToClipboard("headers");
+}
+
+function copyToClipboard(elementId) {
+  // Create an auxiliary hidden input
+  var aux = document.createElement("input");
+
+  // Get the text from the element passed into the input
+  aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+  // Append the aux input to the body
+  document.body.appendChild(aux);
+
+  // Highlight the content
+  aux.select();
+
+  // Execute the copy command
+  document.execCommand("copy");
+
+  // Show copied text
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copied.";
+
+  // Remove the input from the body
+  document.body.removeChild(aux);
+}
+
 function generate_nonce() {
   document.getElementById("nonce").value = uuidv4();
 }
 
+function get_timestamp() {
+  document.getElementById("nonce").value = new Date().getTime();
+}
+
 function uuidv4() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(c) {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
     var r = (Math.random() * 16) | 0,
       v = c == "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
+}
+
+function showToolTip() {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy to clipboard";
 }

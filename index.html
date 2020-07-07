@@ -57,6 +57,44 @@
         input {
             width: 50%;
         }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 140px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: -70%;
+            right: 0%;
+            margin-left: -75px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #555 transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -87,6 +125,7 @@
     <strong><label>Nonce:</label></strong>
     <input id="nonce" value="uuid"></span>
     <button class="button" onclick="generate_nonce()">Generate Nonce</button>
+    <button class="button" onclick="get_timestamp()">Get Timestamp</button>
     <br />
     <br />
     <strong><label>QueryString:</label></strong>
@@ -107,7 +146,11 @@
     <br />
     <strong><label>Auth Headers:</label></strong>
     <pre class="pre" id="headers"></pre>
-    <button class="button bigbutton" id="generate" onclick="generate()">Generate HMAC Signature</button>
+    <div class="tooltip">
+        <button class="button bigbutton" id="generate" onmouseout="showToolTip()" onclick="generate_and_copy()">Generate
+            HMAC Signature</button>
+        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+    </div>
 </body>
 
 </html>
